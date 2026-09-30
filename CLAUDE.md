@@ -100,6 +100,15 @@ pick × default effort × all models), then add factors where the pilot shows so
   estimates also comes from there.
 - If an API detail here disagrees with the current docs (https://openrouter.ai/docs), the docs win;
   note the discrepancy in this file.
+- Discrepancies / additions found 2026-09-30:
+  - `/models` entries now have a `reasoning` object (`mandatory`, `default_enabled`,
+    `supported_efforts`, `default_effort`); use it rather than inferring from `supported_parameters`.
+    Effort levels now include `minimal`, `xhigh`, `max` and `none` (not all models support all).
+  - The catalog `pricing` is the cheapest provider's price. The pinned provider's price comes from
+    `GET /api/v1/models/{id}/endpoints` (cached as `survey/cache/endpoints_<date>.json`); for
+    open-weight models it can be several times higher.
+  - Provider pins use endpoint tags from that endpoint list (e.g. `anthropic`, `google-vertex/global`,
+    `deepinfra/bf16`). Some first-party open-weight endpoints are quantized (`moonshotai/mxfp4`, `z-ai/fp8`).
 
 ## Choosing models
 
