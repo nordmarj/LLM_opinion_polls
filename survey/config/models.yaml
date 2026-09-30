@@ -1,0 +1,338 @@
+# Models. Generated from survey/cache/models_2026-09-30.json + endpoints_2026-09-30.json.
+# Never hand-type ids: copy them from the cache (`uv run survey models show` checks every id).
+# provider_order: endpoint tag(s) to pin (first-party where one exists); fallbacks are disabled.
+# efforts: 'default' (send no reasoning field) plus the catalog's supported_efforts.
+# reasoning_mandatory: from the catalog; effort 'none' is skipped for these.
+# reasoning_default_on: catalog mandatory or default_enabled; used only for token-cost priors.
+# enabled: included in designs with models: enabled. PROPOSED LIST - not yet approved.
+
+models:
+  - id: anthropic/claude-fable-5.1
+    slug: claude-fable-5.1
+    family: anthropic
+    provider_order: [anthropic]
+    efforts: [default, high, medium, low]
+    reasoning_mandatory: true
+    reasoning_default_on: true
+    open_weights: false
+    max_tokens: 16000
+    concurrency: 8
+    enabled: true
+    notes: "Kastner's primary model; H_mwi many-worlds 20/20 under all personas"
+
+  - id: anthropic/claude-fable-5
+    slug: claude-fable-5
+    family: anthropic
+    provider_order: [anthropic]
+    efforts: [default, high, medium, low]
+    reasoning_mandatory: true
+    reasoning_default_on: true
+    open_weights: false
+    max_tokens: 16000
+    concurrency: 8
+    enabled: true
+
+  - id: anthropic/claude-opus-5.5
+    slug: claude-opus-5.5
+    family: anthropic
+    provider_order: [anthropic]
+    efforts: [default, high, medium, low]
+    reasoning_mandatory: true
+    reasoning_default_on: true
+    open_weights: false
+    max_tokens: 16000
+    concurrency: 8
+    enabled: true
+    notes: "Kastner: most cue-sensitive"
+
+  - id: anthropic/claude-opus-5
+    slug: claude-opus-5
+    family: anthropic
+    provider_order: [anthropic]
+    efforts: [default, high, medium, low]
+    reasoning_mandatory: false
+    reasoning_default_on: true
+    open_weights: false
+    max_tokens: 16000
+    concurrency: 8
+    enabled: true
+    notes: "Kastner: shifts toward EDT rather than CDT"
+
+  - id: anthropic/claude-sonnet-5.5
+    slug: claude-sonnet-5.5
+    family: anthropic
+    provider_order: [anthropic]
+    efforts: [default, high, medium, low]
+    reasoning_mandatory: true
+    reasoning_default_on: true
+    open_weights: false
+    max_tokens: 16000
+    concurrency: 8
+    enabled: true
+
+  - id: anthropic/claude-sonnet-5
+    slug: claude-sonnet-5
+    family: anthropic
+    provider_order: [anthropic]
+    efforts: [default, high, medium, low]
+    reasoning_mandatory: false
+    reasoning_default_on: true
+    open_weights: false
+    max_tokens: 16000
+    concurrency: 8
+    enabled: true
+    notes: "Kastner's judge model"
+
+  - id: anthropic/claude-opus-4.6
+    slug: claude-opus-4.6
+    family: anthropic
+    provider_order: [anthropic]
+    efforts: [default, high, medium, low]
+    reasoning_mandatory: false
+    reasoning_default_on: false
+    open_weights: false
+    max_tokens: 16000
+    concurrency: 8
+    enabled: true
+    notes: "older generation"
+
+  - id: anthropic/claude-haiku-4.5
+    slug: claude-haiku-4.5
+    family: anthropic
+    provider_order: [anthropic]
+    efforts: [default]
+    reasoning_mandatory: false
+    reasoning_default_on: false
+    open_weights: false
+    max_tokens: 16000
+    concurrency: 8
+    enabled: true
+    notes: "small / older"
+
+  - id: openai/gpt-6-astra
+    slug: gpt-6-astra
+    family: openai
+    provider_order: [openai]
+    efforts: [default, high, medium, low]
+    reasoning_mandatory: true
+    reasoning_default_on: true
+    open_weights: false
+    max_tokens: 16000
+    concurrency: 8
+    enabled: true
+    notes: "Kastner's OpenAI model"
+
+  - id: openai/gpt-6.1-sol
+    slug: gpt-6.1-sol
+    family: openai
+    provider_order: [openai]
+    efforts: [default, high, medium, low]
+    reasoning_mandatory: true
+    reasoning_default_on: true
+    open_weights: false
+    max_tokens: 16000
+    concurrency: 8
+    enabled: true
+
+  - id: openai/gpt-6-luna
+    slug: gpt-6-luna
+    family: openai
+    provider_order: [openai]
+    efforts: [default, high, medium, low, none]
+    reasoning_mandatory: false
+    reasoning_default_on: true
+    open_weights: false
+    max_tokens: 16000
+    concurrency: 8
+    enabled: true
+    notes: "small"
+
+  - id: openai/gpt-5.5
+    slug: gpt-5.5
+    family: openai
+    provider_order: [openai]
+    efforts: [default, high, medium, low, none]
+    reasoning_mandatory: false
+    reasoning_default_on: true
+    open_weights: false
+    max_tokens: 16000
+    concurrency: 8
+    enabled: true
+    notes: "older generation"
+
+  - id: openai/gpt-oss-120b
+    slug: gpt-oss-120b
+    family: openai
+    provider_order: [deepinfra/bf16]
+    efforts: [default, high, medium, low]
+    reasoning_mandatory: true
+    reasoning_default_on: true
+    open_weights: true
+    max_tokens: 16000
+    concurrency: 8
+    enabled: true
+    notes: "no first-party endpoint; pinned to a bf16 host"
+
+  - id: google/gemini-3.8-flash
+    slug: gemini-3.8-flash
+    family: google
+    provider_order: [google-vertex/global]
+    efforts: [default, high, medium, low]
+    reasoning_mandatory: true
+    reasoning_default_on: true
+    open_weights: false
+    max_tokens: 16000
+    concurrency: 8
+    enabled: true
+
+  - id: google/gemini-3.1-pro-preview
+    slug: gemini-3.1-pro
+    family: google
+    provider_order: [google-vertex/global]
+    efforts: [default, high, medium, low]
+    reasoning_mandatory: true
+    reasoning_default_on: true
+    open_weights: false
+    max_tokens: 16000
+    concurrency: 8
+    enabled: true
+    notes: "latest Pro on OpenRouter"
+
+  - id: google/gemini-2.5-pro
+    slug: gemini-2.5-pro
+    family: google
+    provider_order: [google-vertex/global]
+    efforts: [default]
+    reasoning_mandatory: true
+    reasoning_default_on: true
+    open_weights: false
+    max_tokens: 16000
+    concurrency: 8
+    enabled: true
+    notes: "older generation"
+
+  - id: deepseek/deepseek-v4-pro-0813
+    slug: deepseek-v4-pro
+    family: deepseek
+    provider_order: [deepseek]
+    efforts: [default, high, low]
+    reasoning_mandatory: false
+    reasoning_default_on: false
+    open_weights: true
+    max_tokens: 16000
+    concurrency: 4
+    enabled: true
+
+  - id: deepseek/deepseek-v4.1-flash
+    slug: deepseek-v4.1-flash
+    family: deepseek
+    provider_order: [deepseek]
+    efforts: [default, high, low]
+    reasoning_mandatory: false
+    reasoning_default_on: true
+    open_weights: true
+    max_tokens: 16000
+    concurrency: 4
+    enabled: true
+
+  - id: qwen/qwen3.8-2.4t-a95b
+    slug: qwen3.8-2.4t
+    family: qwen
+    provider_order: [alibaba]
+    efforts: [default, medium, low]
+    reasoning_mandatory: true
+    reasoning_default_on: true
+    open_weights: true
+    max_tokens: 16000
+    concurrency: 4
+    enabled: true
+
+  - id: qwen/qwen3.8-27b
+    slug: qwen3.8-27b
+    family: qwen
+    provider_order: [alibaba]
+    efforts: [default, medium, low]
+    reasoning_mandatory: false
+    reasoning_default_on: true
+    open_weights: true
+    max_tokens: 16000
+    concurrency: 4
+    enabled: true
+
+  - id: meta-llama/llama-4-maverick
+    slug: llama-4-maverick
+    family: meta
+    provider_order: [google-vertex/us-east5]
+    efforts: [default]
+    reasoning_mandatory: false
+    reasoning_default_on: false
+    open_weights: true
+    max_tokens: 16000
+    concurrency: 4
+    enabled: true
+    notes: "newest Llama on OpenRouter is Apr 2025; no reasoning"
+
+  - id: mistralai/mistral-small-2603
+    slug: mistral-small-4
+    family: mistral
+    provider_order: [mistral]
+    efforts: [default, high, none]
+    reasoning_mandatory: false
+    reasoning_default_on: false
+    open_weights: true
+    max_tokens: 16000
+    concurrency: 4
+    enabled: true
+    notes: "Mistral-Small-4-119B open weights"
+
+  - id: mistralai/mistral-medium-3-5
+    slug: mistral-medium-3.5
+    family: mistral
+    provider_order: [mistral]
+    efforts: [default, high, none]
+    reasoning_mandatory: false
+    reasoning_default_on: false
+    open_weights: false
+    max_tokens: 16000
+    concurrency: 4
+    enabled: true
+    notes: "closed weights"
+
+  - id: moonshotai/kimi-k3
+    slug: kimi-k3
+    family: moonshot
+    provider_order: [moonshotai/mxfp4]
+    efforts: [default, high, low]
+    reasoning_mandatory: false
+    reasoning_default_on: true
+    open_weights: true
+    max_tokens: 16000
+    concurrency: 4
+    enabled: true
+    notes: "first-party endpoint serves mxfp4"
+
+  - id: z-ai/glm-5.3
+    slug: glm-5.3
+    family: zai
+    provider_order: [z-ai/fp8]
+    efforts: [default, high, low]
+    reasoning_mandatory: true
+    reasoning_default_on: true
+    open_weights: true
+    max_tokens: 16000
+    concurrency: 4
+    enabled: true
+    notes: "first-party endpoint serves fp8"
+
+  - id: x-ai/grok-4.7
+    slug: grok-4.7
+    family: xai
+    provider_order: [xai]
+    efforts: [default, high, medium, low]
+    reasoning_mandatory: true
+    reasoning_default_on: true
+    open_weights: false
+    max_tokens: 16000
+    concurrency: 4
+    enabled: true
+    notes: "optional extra family"

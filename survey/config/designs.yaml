@@ -1,0 +1,56 @@
+# Which cells to run. Each design expands to questions x cues x formats x efforts x models.
+#   cues: from_question (the question's cue_set) | a cue_set name | a list of cue ids
+#   efforts: list, or "model" for every effort in the model's config
+#   models: enabled | list of slugs
+designs:
+  smoke:
+    # Harness check before the pilot: two cells per model, n=2.
+    questions: [qm_full, dt_control]
+    cues: [none]
+    formats: [pick]
+    efforts: [default]
+    models: enabled
+    n: 2
+
+  pilot_core:
+    # CLAUDE.md structured subset: all questions x core cues x single pick x default effort x all models.
+    questions: [qm_full, qm_binary, qm_prefer, dt_control, panel_moral_realism, panel_zombies, panel_stats]
+    cues: from_question
+    formats: [pick]
+    efforts: [default]
+    models: enabled
+    n: 10
+
+  pilot_qm_only:
+    # Cheaper alternative: QM questions and the positive control only.
+    questions: [qm_full, qm_binary, qm_prefer, dt_control]
+    cues: from_question
+    formats: [pick]
+    efforts: [default]
+    models: enabled
+    n: 10
+
+  # ---- added after the pilot, if warranted ----
+  extra_cues:
+    questions: [qm_full]
+    cues: qm_extra
+    formats: [pick]
+    efforts: [default]
+    models: enabled
+    n: 10
+
+  credences:
+    questions: [qm_full]
+    cues: qm_core
+    formats: [credence]
+    efforts: [default]
+    models: enabled
+    n: 10
+
+  effort:
+    questions: [qm_full]
+    cues: [none, physics_prof, phil_physics, lw_reader, nurse]
+    formats: [pick]
+    efforts: [none, low, high]
+    models: enabled
+    n: 10

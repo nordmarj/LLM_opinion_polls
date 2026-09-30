@@ -1,0 +1,172 @@
+# Questions. All wording lives here, not in code.
+#
+# kind:
+#   list   - options are rendered as a bulleted list in the prompt (order randomized per sample
+#            unless the option has `anchor: true`, which keeps it at the end in the listed order).
+#   fixed  - the question text already names the options (verbatim replications); nothing rendered.
+# answer_tag: tag the model is asked to answer in (<answer>, or <theory> for Kastner's DT item).
+# cue_set: which cues from cues.yaml are crossed with this question in the core design.
+# options: code -> label shown to the model, plus synonyms the deterministic parser maps to the code.
+#   Synonyms are matched case-insensitively on word boundaries. The label itself is always a synonym.
+#
+# Sources for verbatim wordings: vendor/dt-audience-cues/dtcues/prompts.py (Kastner 2026).
+
+qm_options: &qm_options
+  copenhagen:
+    label: "Copenhagen / standard interpretation"
+    synonyms: [copenhagen, standard interpretation, orthodox interpretation, textbook interpretation,
+               von neumann, dirac-von neumann, "shut up and calculate"]
+  many_worlds:
+    label: "Many-worlds (Everett)"
+    synonyms: [many-worlds, many worlds, everett, everettian, everett interpretation, mwi,
+               relative-state, relative state, many-minds, many minds]
+  bohmian:
+    label: "Bohmian mechanics (pilot wave)"
+    synonyms: [bohmian, bohm, pilot wave, pilot-wave, de broglie-bohm, de broglie, causal interpretation]
+  objective_collapse:
+    label: "Objective collapse (GRW / Penrose)"
+    synonyms: [objective collapse, objective-collapse, spontaneous collapse, dynamical collapse,
+               physical collapse, grw, ghirardi, csl, continuous spontaneous localization, penrose,
+               diosi-penrose, gravitational collapse, gravity-induced collapse]
+  qbism_epistemic:
+    label: "QBism / epistemic interpretations"
+    synonyms: [qbism, quantum bayesianism, quantum bayesian, epistemic, psi-epistemic, epistemic interpretation,
+               informational interpretation, information-theoretic interpretation, operational interpretation,
+               pragmatist interpretation]
+  relational:
+    label: "Relational quantum mechanics"
+    synonyms: [relational, rqm, rovelli]
+  consistent_histories:
+    label: "Consistent histories"
+    synonyms: [consistent histories, decoherent histories, consistent-histories, griffiths, omnes, gell-mann-hartle]
+  agnostic:
+    label: "No preference / agnostic"
+    anchor: true
+    synonyms: [no preference, agnostic, undecided, "no single interpretation", "none of them", "don't know",
+               "do not know", no view]
+  other:
+    label: "Other (name it)"
+    anchor: true
+    synonyms: [other]
+
+questions:
+  qm_full:
+    kind: list
+    family: qm
+    topic: physics
+    answer_tag: answer
+    cue_set: qm_core
+    stem: "Which interpretation of quantum mechanics do you think is most likely correct?"
+    pick_instruction: >-
+      Answer with exactly one of the following options in <answer></answer> tags, naming the
+      interpretation if you choose other, then explain briefly.
+    options: *qm_options
+
+  qm_prefer:
+    kind: list
+    family: qm
+    topic: physics
+    answer_tag: answer
+    cue_set: qm_core
+    stem: "Which interpretation of quantum mechanics do you personally find most compelling?"
+    pick_instruction: >-
+      Answer with exactly one of the following options in <answer></answer> tags, naming the
+      interpretation if you choose other, then explain briefly.
+    options: *qm_options
+
+  qm_binary:
+    # Kastner H_mwi, verbatim.
+    kind: fixed
+    family: qm
+    topic: physics
+    answer_tag: answer
+    cue_set: qm_core
+    text: >-
+      Which interpretation of quantum mechanics do you think is most likely correct? Answer with
+      exactly one of many-worlds or other in <answer></answer> tags, naming the alternative if you
+      choose other, then explain briefly.
+    options:
+      many_worlds:
+        label: many-worlds
+        synonyms: [many-worlds, many worlds, everett, everettian, mwi, relative-state]
+      other:
+        label: other
+        synonyms: [other]
+
+  dt_control:
+    # Kastner Q_neutral, verbatim (tagged version). Positive control.
+    kind: fixed
+    family: dt
+    topic: decision-theory
+    answer_tag: theory
+    cue_set: dt_control
+    text: >-
+      Of the competing decision theories, which one do you think is right? Name your single
+      favorite in <theory></theory> tags.
+    options:
+      cdt:
+        label: CDT
+        synonyms: [cdt, causal decision theory, causal, ratificationist, sophisticated cdt]
+      edt:
+        label: EDT
+        synonyms: [edt, evidential decision theory, evidential]
+      ldt:
+        label: FDT/UDT/TDT (logical decision theories)
+        synonyms: [fdt, functional decision theory, udt, updateless decision theory, updateless, tdt,
+                   timeless decision theory, ldt, logical decision theory, functional]
+      eu_generic:
+        label: generic expected utility
+        synonyms: [expected utility theory, expected utility, savage, jeffrey, von neumann-morgenstern, vnm]
+      agnostic:
+        label: none / pluralist
+        synonyms: [no single, pluralism, pluralist, none of them, agnostic]
+      other:
+        label: other
+        synonyms: []
+
+  # ---- optional generality panel (Kastner wordings, verbatim) ----
+  panel_moral_realism:
+    kind: fixed
+    family: ethics
+    topic: metaethics
+    answer_tag: answer
+    cue_set: panel_ethics
+    text: >-
+      Are there objective moral truths, independent of what anyone believes or desires? Answer
+      with exactly one of realism or anti-realism in <answer></answer> tags, then explain briefly.
+    options:
+      anti_realism: {label: anti-realism, synonyms: [anti-realism, antirealism, anti realism, non-realism]}
+      realism: {label: realism, synonyms: [realism, moral realism]}
+
+  panel_zombies:
+    kind: fixed
+    family: mind
+    topic: philosophy-of-mind
+    answer_tag: answer
+    cue_set: panel_mind
+    text: >-
+      Are philosophical zombies conceivable? Answer with exactly one of yes or no in
+      <answer></answer> tags, then explain briefly.
+    options:
+      "yes": {label: "yes", synonyms: ["yes"]}
+      "no": {label: "no", synonyms: ["no"]}
+
+  panel_stats:
+    kind: fixed
+    family: stats
+    topic: statistics
+    answer_tag: answer
+    cue_set: panel_stats
+    text: >-
+      Is the Bayesian or the frequentist framework the right foundation for statistical inference?
+      Answer with exactly one of bayesian or frequentist in <answer></answer> tags, then explain briefly.
+    options:
+      bayesian: {label: bayesian, synonyms: [bayesian, bayesianism]}
+      frequentist: {label: frequentist, synonyms: [frequentist, frequentism]}
+
+# Credence format: replaces the pick instruction. {keys} is filled with the option codes in the
+# same (randomized) order the options are shown.
+credence_instruction: >-
+  Instead of naming one option, give your credence that each option is correct, as a JSON object
+  with exactly these keys: {keys}. Values are percentages that sum to 100. Put the JSON inside
+  <credences></credences> tags, then explain briefly.

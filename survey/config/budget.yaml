@@ -1,0 +1,31 @@
+# Spending limits. The runner refuses to start above ask_above_usd without --confirm-cost, and stops
+# mid-run when spent (all pilot + raw records) + in-flight + next request would exceed hard_cap_usd.
+hard_cap_usd: 25.0
+ask_above_usd: 10.0
+
+# Models approved for a first run (CLAUDE.md: always ask before the first run on a new model).
+# Add a slug here only after the user has approved it.
+approved_models: []
+
+# Output-token priors (completion tokens incl. reasoning) used by `survey plan` until a model has
+# >= 5 pilot samples at that effort; then observed means replace them automatically.
+# Class priors are from Kastner's raw data (Claude high effort, one-question prompts: median 600-1300,
+# p90 700-1700; GPT-6 Astra default: ~200), inflated because the qm_full prompt lists nine options.
+output_token_priors:
+  classes:
+    reasoning: 1800     # mandatory-reasoning model at default effort, or any explicit effort
+    default: 600        # optional-reasoning model at default settings
+    none: 500           # reasoning disabled
+  models:
+    claude-opus-5: {default: 2500}        # Kastner: 1000-2800 median at high
+    gpt-6-astra: {default: 400}           # Kastner: ~200 median, default effort
+    kimi-k3: {default: 5000}              # default effort is "max"
+    glm-5.3: {default: 5000}              # default effort is "max"
+    qwen3.8-2.4t: {default: 5000}         # default effort is "xhigh"
+    qwen3.8-27b: {default: 5000}          # default effort is "xhigh"
+    llama-4-maverick: {default: 500}      # no reasoning
+
+# Judge models by family; the judge for a coded model is the first entry of a different family.
+judges:
+  anthropic: anthropic/claude-sonnet-5.5
+  openai: openai/gpt-6.1-sol
