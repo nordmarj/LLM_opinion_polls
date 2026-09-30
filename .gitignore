@@ -1,0 +1,14 @@
+# secrets and local-only
+.env
+.env.*
+!.env.example
+logs/
+vendor/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
